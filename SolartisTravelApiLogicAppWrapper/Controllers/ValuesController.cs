@@ -87,11 +87,14 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
         {
             try
             {
-                return $"@{user}, Get a rate as low as {incModel?.PremiumInformations?.TotalGrossPremium} including Trip Cancellation! Quote generated {DateTime.Now.ToString("")}";
+
+                return string.IsNullOrWhiteSpace(incModel?.PremiumInformations?.TotalGrossPremium) ?
+                    $"{user}, Oh Dear...I was not able to get you a rate. Generated {DateTime.UtcNow}" :
+                    $"{user}, Get a rate as low as {incModel?.PremiumInformations?.TotalGrossPremium} including Trip Cancellation! Quote generated {DateTime.UtcNow}. #solartishack";
             }
             catch (Exception e)
             {
-                return "Was not able to get you that rate...Error:" + e.Message;
+                return $"Was not able to get you that rate...Error: {e.Message}";
             }
         }
 
@@ -106,7 +109,7 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
             }
             catch (Exception e)
             {
-                return "Was not able to extract Origin...Error:" + e.Message;
+                return $"Was not able to extract Origin...Error: {e.Message}";
             }
         }
 
@@ -120,7 +123,7 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
             }
             catch (Exception e)
             {
-                return "Was not able to extract Destination...Error:" + e.Message;
+                return $"Was not able to extract Destination...Error: {e.Message}";
             }
         }
 
