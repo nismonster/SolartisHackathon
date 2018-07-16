@@ -90,7 +90,7 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
 
                 return string.IsNullOrWhiteSpace(incModel?.PremiumInformation?.TotalGrossPremium) ?
                     $"{user}, Oh Dear...I was not able to get you a rate. Generated {DateTime.UtcNow}" :
-                    $"{user}, Get a rate as low as {incModel?.PremiumInformation?.TotalGrossPremium} including Trip Cancellation! Quote generated {DateTime.UtcNow}. #solartishack";
+                    $"{user}, Get a rate as low as ${incModel?.PremiumInformation?.TotalGrossPremium} including Trip Cancellation! Quote generated {DateTime.UtcNow}. #solartishack";
             }
             catch (Exception e)
             {
