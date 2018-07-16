@@ -50,7 +50,7 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
             public string TravelerGrossPremium { get; set; }
         }
 
-        public class PremiumInformation
+        public class PremiumInformations
         {
             public string TotalBasePremium { get; set; }
             public string TripCancellationCoverage { get; set; }
@@ -64,7 +64,7 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
             public string TotalOptionalCoverage { get; set; }
         }
 
-        public class CoverageInformation
+        public class CoverageInformations
         {
             public string CoverageName { get; set; }
             public string CoverageLimit { get; set; }
@@ -73,8 +73,8 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
 
         public string RequestStatus { get; set; }
         public List<object> RuleInformationList { get; set; }
-        public PremiumInformation PremiumInformations { get; set; }
-        public List<CoverageInformation> CoverageInformations { get; set; }
+        public PremiumInformations PremiumInformation { get; set; }
+        public List<CoverageInformations> CoverageInformation { get; set; }
 
     }
 
@@ -88,9 +88,9 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
             try
             {
 
-                return string.IsNullOrWhiteSpace(incModel?.PremiumInformations?.TotalGrossPremium) ?
+                return string.IsNullOrWhiteSpace(incModel?.PremiumInformation?.TotalGrossPremium) ?
                     $"{user}, Oh Dear...I was not able to get you a rate. Generated {DateTime.UtcNow}" :
-                    $"{user}, Get a rate as low as {incModel?.PremiumInformations?.TotalGrossPremium} including Trip Cancellation! Quote generated {DateTime.UtcNow}. #solartishack";
+                    $"{user}, Get a rate as low as {incModel?.PremiumInformation?.TotalGrossPremium} including Trip Cancellation! Quote generated {DateTime.UtcNow}. #solartishack";
             }
             catch (Exception e)
             {
@@ -105,7 +105,7 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
         {
             try
             {
-                return incModel.entities.FirstOrDefault(x => x.type == "Location:Origin")?.entity ?? string.Empty;
+                return incModel.entities.FirstOrDefault(x => x.type == "Location:Origin")?.entity?.ToUpper() ?? string.Empty;
             }
             catch (Exception e)
             {
@@ -119,7 +119,7 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
         {
             try
             {
-                return incModel.entities.FirstOrDefault(x => x.type == "Location:Destination")?.entity ?? string.Empty;
+                return incModel.entities.FirstOrDefault(x => x.type == "Location:Destination")?.entity.ToUpper() ?? string.Empty;
             }
             catch (Exception e)
             {
