@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -105,7 +106,7 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
         {
             try
             {
-                return incModel.entities.FirstOrDefault(x => x.type == "Location:Origin")?.entity?.ToUpper() ?? string.Empty;
+                return Helper.Instance.ExtractStateCodeFromLocation(incModel.entities.FirstOrDefault(x => x.type == "Location:Origin")?.entity)?.ToUpper() ?? string.Empty;
             }
             catch (Exception e)
             {
@@ -119,7 +120,7 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
         {
             try
             {
-                return incModel.entities.FirstOrDefault(x => x.type == "Location:Destination")?.entity.ToUpper() ?? string.Empty;
+                return Helper.Instance.ExtractCountryFromLocation(incModel.entities.FirstOrDefault(x => x.type == "Location:Destination")?.entity)?.ToUpper() ?? string.Empty;
             }
             catch (Exception e)
             {
@@ -127,6 +128,9 @@ namespace SolartisTravelApiLogicAppWrapper.Controllers
             }
         }
 
-
+        private string ExtractUSAStateCodeFromLocation(string incLocation)
+        {
+            return "";
+        }
     }
 }
